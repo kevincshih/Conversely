@@ -7,8 +7,15 @@ var main = function (){
         if (next.length === 0) {
             var sections = $('.interactive').children();
             next = sections.first();
+            $('#text1').val("");
+            $('#text2').val("");
         }
-        if ($(this).hasClass('score')) {
+        else if (next.hasClass('section2')){ 
+            var text1 = $('.text1').val();
+            setCountDown(calculateTime(text1.length));
+        }
+        else if (next.hasClass('section3')) {
+            clearCountDown();
             var text1 = $('.text1').val();
             var text2 = $('.text2').val();
             var result = calculateScore(text1, text2);
@@ -19,6 +26,31 @@ var main = function (){
     });
 
 };
+
+var handler, count;
+
+var setCountDown = function (seconds) {
+    count = seconds;
+    var updateCountDown = function () {
+        count--;
+        if (count <= 0) {
+            $(".score").trigger('click');
+        }
+        else {
+            document.getElementById("timer").innerHTML = String(count);
+        }
+    }
+    handler = setInterval(updateCountDown, 1000);
+}
+
+var clearCountDown = function () {
+    clearInterval(handler);
+    document.getElementById("timer").innerHTML = '';
+}
+
+var calculateTime = function (length) {
+    return 10 + Math.floor(length / 5);
+}
 
 var calculateScore = function (sa1, sa2) {
 
@@ -58,7 +90,13 @@ var calculateScore = function (sa1, sa2) {
     
     var similarity_num = 2 * intersect(pairs(s1), pairs(s2)).length;
     var similarity_den = pairs(s1).length + pairs(s2).length;
-    var similarity = similarity_num / similarity_den * 100;
+    var similarity;
+    if (similarity_den === 0) {
+        similarity = 100;
+    }
+    else {
+        similarity = similarity_num / similarity_den * 100;
+    }
     return similarity.toPrecision(4);
 };
 
