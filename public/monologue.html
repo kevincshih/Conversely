@@ -1,0 +1,50 @@
+<html>
+<head>
+    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <style>
+        hidden { display:none }
+    </style>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1><a href="index.html">Conversely Beta 0.11</a></h1>
+    </div>
+    <div class="interactive">
+        <div class="section1">
+            <div class="form-group">
+                <label for="inputlg">Input monologue text</label>
+                <textarea class="form-control text1" id="text1" rows="12" placeholder="Enter text here." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-default submit prompt">Submit</button>
+        </div>
+        <div class="section2">
+            <div class="form-group">
+                <label for="inputlg">Now type in the text</label>
+                <textarea class="form-control text2" id="text2" rows="12" placeholder="Enter text here." required></textarea>
+                <p id="timer"></p>
+            </div>
+            <button type="submit" class="btn btn-default submit score">Submit</button>
+        </div>
+        <div class="section3">
+            <p>Original Monologue</p>
+            <br />
+            <p id="displayinput1"></p>
+            <br />
+            <p>You Entered</p>
+            <br />
+            <p id="displayinput2"></p>
+            <br />
+            <p id="text3"></p>
+            <button type="submit" class="btn btn-default submit">Try Again</button>
+        </div>
+    </div>
+    <script src='monologue.js'></script>
+</body>
+</html>
