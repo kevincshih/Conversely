@@ -1,4 +1,4 @@
-var main = function (){
+var main = function () {
     $(".section2").addClass('hidden');
     $(".section3").addClass('hidden');
     $(".submit").click(function (event) {

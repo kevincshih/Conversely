@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="jumbotron">
-        <h1><a href="index.html">Conversely Beta 0.11</a></h1>
+        <h1><a href="index.html">Conversely Beta 0.20</a></h1>
     </div>
     <div class="interactive">
         <div class="section1">
@@ -22,22 +22,24 @@
                 <label for="inputlg">Input dialogue text</label>
                 <textarea class="form-control text1" id="text1" rows="12" placeholder="Enter text here." required></textarea>
             </div>
-            <button type="submit" class="btn btn-default submit prompt">Submit</button>
+            <button type="submit" class="btn btn-default submit prompt" id="btn1">Submit</button>
         </div>
         <div class="section2">
             <div class="chatlog">
-                <p id="placeholder"></p>
+                <pre id="placeholder"></pre>
             </div>
-            <div class="form-group">
-                <label for="inputlg">Type in response</label>
-                <textarea class="form-control text2" id="text2" rows="1" placeholder="Enter text here." required></textarea>
-                <p id="timer"></p>
+            <div class="sub1">
+                <div class="form-group">
+                    <label for="inputlg">Type in response</label>
+                    <textarea class="form-control text2" id="text2" rows="1" placeholder="Enter text here." required></textarea>
+                    <p id="timer"></p>
+                </div>
+                <button type="submit" class="btn btn-default submit score" id="btn2">Submit</button>
             </div>
-            <button type="submit" class="btn btn-default submit score">Submit</button>
-        </div>
-        <div class="section3">
-            <p id="text3"></p>
-            <button type="submit" class="btn btn-default submit">Try Again</button>
+            <div class="sub2">
+                <button type="submit" class="btn btn-default submit" id="btn3">Try Again</button>
+            </div>
+
         </div>
     </div>
     <script src='dialogue.js'></script>

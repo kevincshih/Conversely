@@ -1,46 +1,72 @@
-var main = function (){
+var main = function () {
+    $(".sub2").addClass('hidden');
     $(".section2").addClass('hidden');
-    $(".section3").addClass('hidden');
-    $(".submit").click(function (event) {
-        var parent = $(this).parent();
-        var next = parent.next();
-        if (parent.hasClass('section1')) {
-            var text1 = $('#text1').val();
-            dialogue = text1.split(/[\r\n]+/);
-            //dialogue = ['a', 'b', 'c'];
-            parent.addClass('hidden');
-            next.removeClass('hidden');
-        }
-        else if (parent.hasClass('section2')) {
-            if (dialogue.length > 1) {
-                document.getElementById("placeholder").innerHTML = String(dialogue);
-                var prompt = dialogue.shift();
-                var response = dialogue.shift();
-            }
-            else if (dialogue.length === 1) {
-                var prompt = dialogue.shift();
-                document.getElementById("placeholder").innerHTML = String(dialogue);
-            }
-            else if (dialogue.length < 1) {
-                parent.addClass('hidden');
-                next.removeClass('hidden');
-            }
-        }
-        else if (parent.hasClass('section3')) {
-            var sections = $('.interactive').children();
-            next = sections.first();
-            $('#text1').val("");
-            $('#text2').val("");
-            parent.addClass('hidden');
-            next.removeClass('hidden');
+    $("#btn1").click(function (event) {
+        var text1 = $('#text1').val();
+        dialog = text1.split(/[\r\n]+/);
+        if (dialog.length >= 2) {
+            $(".section1").addClass('hidden');
+            $(".section2").removeClass('hidden');
+            handleNextPrompt();
         }
     });
-
+    $("#btn2").click(function (event) {
+        var text2 = $('#text2').val();
+        handleDialogResponse(text2);
+        $('#text2').val("");
+        if (dialog.length >= 2) {
+            handleNextPrompt();
+        }
+        else {
+            $(".sub1").addClass('hidden');
+            $(".sub2").removeClass('hidden');
+        }
+    });
+    $("#btn3").click(function (event) {
+        $(".sub2").addClass('hidden');
+        $(".sub1").removeClass('hidden');
+        $('#text1').val("");
+        document.getElementById("placeholder").innerHTML = "";
+        $(".section2").addClass('hidden');
+        $(".section1").removeClass('hidden');
+    });
 };
 
-var dialogue = new Array();
+var dialog = new Array();
+var scores = new Array();
+
+var prompt, expected;
 
 var handler, count;
+
+var getAverage = function(array){
+    var sum = 0;
+    for (var i = 0; i < array.length; i++) {
+        sum += array[i]
+    }
+    if (array.length > 0) {
+        return sum / array.length;
+    }
+    else {
+        return 0;
+    }
+}
+
+var handleNextPrompt = function () {
+    prompt = dialog.shift();
+    expected = dialog.shift();
+    var s1 = "Prompt: " + prompt + '\r\n';
+    document.getElementById("placeholder").innerHTML += s1;
+}
+
+var handleDialogResponse = function (response) {
+    var score = calculateScore(expected, response);
+    scores.push(score);
+    var s2 = "Expected Response: " + expected + '\r\n';
+    var s3 = "Your Response: " + response + '\r\n';
+    var s4 = "Your Score: " + String(score) + '%' + '\r\n';
+    document.getElementById("placeholder").innerHTML += s2 + s3 + s4;
+}
 
 var setCountDown = function (seconds) {
     count = seconds;
