@@ -10,6 +10,12 @@ var main = function () {
             handleNextPrompt();
         }
     });
+    $("#text2").keypress(function (event) {
+        var code = (event.keyCode ? event.keyCode : event.which);
+        if (code === 13) {
+            $("#btn2").trigger('click');
+        }
+    });
     $("#btn2").click(function (event) {
         var text2 = $('#text2').val();
         handleDialogResponse(text2);
@@ -18,6 +24,7 @@ var main = function () {
             handleNextPrompt();
         }
         else {
+            clearCountDown();
             $(".sub1").addClass('hidden');
             $(".sub2").removeClass('hidden');
         }
@@ -57,6 +64,9 @@ var handleNextPrompt = function () {
     expected = dialog.shift();
     var s1 = "Prompt: " + prompt + '\r\n';
     document.getElementById("placeholder").innerHTML += s1;
+    clearCountDown();
+    var time = calculateTime(expected.length);
+    setCountDown(time);
 }
 
 var handleDialogResponse = function (response) {
@@ -73,7 +83,7 @@ var setCountDown = function (seconds) {
     var updateCountDown = function () {
         count--;
         if (count <= 0) {
-            $(".score").trigger('click');
+            $("#btn2").trigger('click');
         }
         else {
             document.getElementById("timer").innerHTML = String(count);
