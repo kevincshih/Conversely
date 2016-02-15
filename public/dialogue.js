@@ -65,11 +65,13 @@ var handleNextPrompt = function () {
     var s1 = "Prompt: " + prompt + '\r\n';
     document.getElementById("placeholder").innerHTML += s1;
     clearCountDown();
+    readme(prompt, 2);
     var time = calculateTime(expected.length);
     setCountDown(time);
 }
 
 var handleDialogResponse = function (response) {
+    readme(response, 0);
     var score = calculateScore(expected, response);
     scores.push(score);
     var s2 = "Expected Response: " + expected + '\r\n';
